@@ -15,7 +15,11 @@
     "type": "git",
     "url": "git+https://github.com/asimovbio/pulumi-gcp-components.git"
   },
-  "keywords": [],
+  "keywords": [
+    "iac",
+    "pulumi",
+    "gcp"
+  ],
   "author": "vinicius.schettino@asimov.com",
   "license": "MIT",
   "packageManager": "yarn@3.2.0",

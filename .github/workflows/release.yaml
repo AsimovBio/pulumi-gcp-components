@@ -15,7 +15,8 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
           scope: '@asimovbio'
-      - run: |
+      - name: Install Dependencies
+        run: |
           corepack enable
           yarn set version stable
           yarn

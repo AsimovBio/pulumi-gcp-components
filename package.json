@@ -1,6 +1,6 @@
 {
   "name": "@asimovbio/pulumi-gcp-components",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "description": "Extended GCP components for Pulumi",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

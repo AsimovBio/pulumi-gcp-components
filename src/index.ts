@@ -1,1 +1,1 @@
-exports.naming = require('./components/naming');
+export * from './components/naming';

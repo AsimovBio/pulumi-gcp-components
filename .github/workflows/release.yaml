@@ -1,7 +1,7 @@
 name: Publish Package to npmjs
 on:
-  push:
-    branches: main
+  release:
+    types: [created]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,7 +12,15 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
           scope: '@asimovbio'
-      - run: yarn
+      - run: |
+          yarn
+          yarn plugin import version
+          yarn version ${GITHUB_REF#refs/*/}
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: EndBug/add-and-commit@v8
+        with:
+          default_author: github_actions
+          add: 'package.json'
+          push: true

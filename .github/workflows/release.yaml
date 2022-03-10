@@ -13,8 +13,9 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@asimovbio'
       - run: |
+          echo "version: ${GITHUB_REF##*/}"
           yarn
-          yarn version ${GITHUB_REF#refs/*/}
+          yarn version ${GITHUB_REF##*/}
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

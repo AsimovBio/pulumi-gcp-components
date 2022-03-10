@@ -13,7 +13,8 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@asimovbio'
       - run: |
-          echo "version: ${GITHUB_REF##*/}"
+          corepack enable
+          yarn set version stable
           yarn
           yarn version ${GITHUB_REF##*/}
       - run: npm publish --access public

@@ -5,6 +5,24 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@asimovbio/pulumi-gcp-components@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@asimovbio/pulumi-gcp-components@workspace:."
+  dependencies:
+    "@pulumi/gcp": ^6.15.1
+    "@pulumi/kubernetes": ^3.16.0
+    "@pulumi/pulumi": ^3.26.1
+    "@typescript-eslint/eslint-plugin": ^5.14.0
+    "@typescript-eslint/parser": ^5.14.0
+    eslint: ^8.10.0
+    eslint-config-airbnb-base: ^15.0.0
+    eslint-config-prettier: ^8.5.0
+    eslint-plugin-import: ^2.25.4
+    eslint-plugin-prettier: ^4.0.0
+    prettier: ^2.5.1
+  languageName: unknown
+  linkType: soft
+
 "@eslint/eslintrc@npm:^1.2.0":
   version: 1.2.0
   resolution: "@eslint/eslintrc@npm:1.2.0"
@@ -1967,24 +1985,6 @@ __metadata:
   checksum: 80e9d9610c3eb66f9eae4e44a1ae30381cedb721b7d5f635d781fe4c507e2c77bb7c879addcd1dda79733d3ae589d9e66fd18d42baf99b35df7382a0f9920795
   languageName: node
   linkType: hard
-
-"pulumi-gcp-components@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "pulumi-gcp-components@workspace:."
-  dependencies:
-    "@pulumi/gcp": ^6.15.1
-    "@pulumi/kubernetes": ^3.16.0
-    "@pulumi/pulumi": ^3.26.1
-    "@typescript-eslint/eslint-plugin": ^5.14.0
-    "@typescript-eslint/parser": ^5.14.0
-    eslint: ^8.10.0
-    eslint-config-airbnb-base: ^15.0.0
-    eslint-config-prettier: ^8.5.0
-    eslint-plugin-import: ^2.25.4
-    eslint-plugin-prettier: ^4.0.0
-    prettier: ^2.5.1
-  languageName: unknown
-  linkType: soft
 
 "punycode@npm:^2.1.0":
   version: 2.1.1

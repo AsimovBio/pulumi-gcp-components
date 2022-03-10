@@ -1,7 +1,7 @@
 name: Publish Package to npmjs
 on:
-  release:
-    types: [created]
+  push:
+    branches: main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,6 +13,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@asimovbio'
       - run: yarn
-      - run: yarn npm publish
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

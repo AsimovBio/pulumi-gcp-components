@@ -14,7 +14,6 @@ jobs:
           scope: '@asimovbio'
       - run: |
           yarn
-          yarn plugin import version
           yarn version ${GITHUB_REF#refs/*/}
       - run: npm publish --access public
         env:

@@ -2,7 +2,7 @@
 
 [![codecov](https://codecov.io/gh/AsimovBio/pulumi-gcp-components/branch/main/graph/badge.svg?token=xKcJUpwS1F)](https://codecov.io/gh/AsimovBio/pulumi-gcp-components)
 
-This package offers a set of Pulumi extended features towards the GCP classic provider.
+This package offers a set of [Pulumi](https://pulumi.com) extended features towards the [GCP classic provider](https://www.pulumi.com/registry/packages/gcp/).
 
 ## Installing
 
@@ -67,7 +67,7 @@ const naming = createNaming({
 const bucket = new aws.s3.Bucket(naming('icon-bucket')); // main-icon-bucket-dev
 ```
 
-### Naming structure
+#### Naming structure
 
 `<radical>-<resource-name>-<suffix>`
 
@@ -75,8 +75,39 @@ const bucket = new aws.s3.Bucket(naming('icon-bucket')); // main-icon-bucket-dev
 - `resource-name`: required if more than one resource of the same type is created
 - `suffix`: environment name is a common usage
 
-## Options
+#### Options
 
 - `radical`: define radical part of name (default: `pulumi.getProject()`)
 - `suffix`: define suffix part of name (default: `undefined`)
 - `defaultSuffix`: use `pulumi.getStack()` in suffix part of name (default: `false`)
+
+### EnabledGCPServices
+
+[Enables a list of services](https://cloud.google.com/service-usage/docs/enable-disable) on a given GCP project. You can find the service list using:
+
+```
+gcloud service list
+```
+
+In order to list which services are enabled for a given project:
+
+```
+gcloud services list --enabled --project my-project
+```
+
+The `--project` parameter is not needed if you have the project set as default with `gcloud config set project my-project`.
+
+To enable a list of services on a given project:
+
+```typescript
+import { EnabledGCPServices } from '@asimovbio/pulumi-gcp-components';
+
+const enabled = new EnabledGCPServices('test', {
+  projectName: 'dummy',
+  servicesToEnable: [
+    'container.googleapis.com',
+    'logging.googleapis.com',
+    'monitoring.googleapis.com',
+  ],
+});
+```

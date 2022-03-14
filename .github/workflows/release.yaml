@@ -22,7 +22,7 @@ jobs:
           yarn
           yarn version ${GITHUB_REF##*/}
       - name: Test (jest)
-          yarn test
+        run: yarn test
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

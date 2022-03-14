@@ -13,8 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-        yarn 
-        yarn test --coverage
+          yarn 
+          yarn test --coverage
       - uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

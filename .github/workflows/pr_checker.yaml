@@ -1,0 +1,20 @@
+name: Test
+on:
+  pull_request:
+    branches:
+      - main
+  push: # so we can have main-updated coverage reports
+    branches:
+      - main
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+        yarn 
+        yarn test --coverage
+      - uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

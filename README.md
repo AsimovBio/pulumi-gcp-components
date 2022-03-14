@@ -1,6 +1,6 @@
 # pulumi-gcp-components
 
-[![codecov](https://codecov.io/gh/AsimovBio/pulumi-gcp-components/branch/master/graph/badge.svg?token=xKcJUpwS1F)](https://codecov.io/gh/AsimovBio/pulumi-gcp-components)
+[![codecov](https://codecov.io/gh/AsimovBio/pulumi-gcp-components/branch/main/graph/badge.svg?token=xKcJUpwS1F)](https://codecov.io/gh/AsimovBio/pulumi-gcp-components)
 
 This package offers a set of Pulumi extended features towards the GCP classic provider.
 

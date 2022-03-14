@@ -12,9 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          yarn 
-          yarn test --coverage
+      - name: install dependencies
+        run: yarn install
+      - name: run tests
+        run: yarn test --coverage
       - uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

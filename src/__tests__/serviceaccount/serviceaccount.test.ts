@@ -3,12 +3,7 @@ import * as pulumi from '@pulumi/pulumi';
 import { pulumiRuntimeMocks } from '../mocks';
 
 pulumi.runtime.setMocks(pulumiRuntimeMocks);
-const originalGcp = jest.requireActual('@pulumi/gcp');
 
-jest.mock('@pulumi/gcp', () => ({
-  ...originalGcp,
-  'serviceaccount.Key.privateKey': jest.fn().mockReturnValue('1231283yu218973'),
-}));
 describe('Create a Service Account + Keypair', () => {
   let ProjectServiceAccount: typeof import('../../components/serviceaccount').default;
 

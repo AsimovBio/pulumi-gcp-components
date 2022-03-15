@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "prepare": "yarn build",
-    "test": "jest --pass-with-no-tests"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",

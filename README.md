@@ -111,3 +111,39 @@ const enabled = new EnabledGCPServices('test', {
   ],
 });
 ```
+
+### ServiceAccount
+
+This component wraps up GCP's [ServiceAccounts](https://www.pulumi.com/registry/packages/gcp/api-docs/serviceaccount/), [Keys](https://www.pulumi.com/registry/packages/gcp/api-docs/serviceaccount/key/) and [IAMBindings](https://www.pulumi.com/registry/packages/gcp/api-docs/projects/iammember/) altogether. The main use case is to create a service account with an access key and the needed permissions:
+
+```typescript
+import { naming as n } from '@asimovbio/pulumi-gcp-components';
+import { ProjectServiceAccount } from '@asimovbio/pulumi-gcp-components';
+
+const serviceAccount = new ProjectServiceAccount(n(), {
+  displayName: `My Deploy Key`,
+  projectName: hierarchy.project.name, // used by default on IAM bindings
+  roles: [
+    'roles/compute.viewer',
+    'roles/pubsub.admin',
+    { id: 'roles/dns.admin', project: 'other-project' }, // you can specify a different project to IAM bindings.
+  ],
+  saId: n('deploy'),
+});
+```
+
+### HierarchicalBindings
+
+This components makes it easier to create folders and projects following the [GCP Resource Hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy). The default constructor creates a folder with a nested project:
+
+```typescript
+import { HierarchicalBindings } from '@asimovbio/pulumi-gcp-components';
+
+const hierarchy = new HierarchicalBindings('default-folder', {
+  orgDomain: 'asimov.io',
+  projectId: 'my-project',
+  billingAccountId: config.requireSecret('billingAccountId'),
+});
+```
+
+The [Billing Account](https://cloud.google.com/billing/docs/concepts#billing_account) Id is optional, but bear in mind that you'll need one associated to a project in order to activate and use most of the GCP services.

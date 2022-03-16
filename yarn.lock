@@ -22,7 +22,6 @@ __metadata:
     "@pulumi/kubernetes": ^3.16.0
     "@pulumi/pulumi": ^3.26.1
     "@types/jest": ^27.4.1
-    "@types/mocha": ^9.1.0
     "@types/node": ^17.0.21
     "@typescript-eslint/eslint-plugin": ^5.14.0
     "@typescript-eslint/parser": ^5.14.0
@@ -1151,13 +1150,6 @@ __metadata:
   version: 3.0.5
   resolution: "@types/minimatch@npm:3.0.5"
   checksum: c41d136f67231c3131cf1d4ca0b06687f4a322918a3a5adddc87ce90ed9dbd175a3610adee36b106ae68c0b92c637c35e02b58c8a56c424f71d30993ea220b92
-  languageName: node
-  linkType: hard
-
-"@types/mocha@npm:^9.1.0":
-  version: 9.1.0
-  resolution: "@types/mocha@npm:9.1.0"
-  checksum: 21e1000dafcfe387c6812be41c44a47b48c27a74d5a70c3d5ef1bb5c88eadadfc74dba06e93f160e7248c8a57b3977b590f82504c801c9927816ecd4668023c0
   languageName: node
   linkType: hard
 

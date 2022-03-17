@@ -1,4 +1,4 @@
-export * from './components/naming';
-export * from './components/service';
-export * from './components/organization';
-export * from './components/serviceaccount';
+export * as naming from './components/naming';
+export * as service from './components/service';
+export * as organization from './components/organization';
+export * as serviceaccount from './components/serviceaccount';

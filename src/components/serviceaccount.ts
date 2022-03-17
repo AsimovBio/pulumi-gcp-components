@@ -22,7 +22,7 @@ export class ProjectServiceAccount extends pulumi.ComponentResource {
   sa: gcp.serviceaccount.Account;
   key: gcp.serviceaccount.Key;
   rawKey: pulumi.Output<string>;
-  jsonKey: pulumi.Output<Object>;
+  jsonKey: pulumi.Output<any>;
   iamMembership: gcp.projects.IAMMember[] = [];
 
   constructor(

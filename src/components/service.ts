@@ -6,7 +6,7 @@ interface EnabledGCPServicesArgs {
   servicesToEnable: string[];
 }
 
-export default class EnabledGCPServices extends pulumi.ComponentResource {
+export class EnabledGCPServices extends pulumi.ComponentResource {
   /* 
     Enables a list of services/APIs on a given project.
   */

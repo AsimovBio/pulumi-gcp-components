@@ -4,13 +4,13 @@ import { pulumiRuntimeMocks } from '../mocks';
 pulumi.runtime.setMocks(pulumiRuntimeMocks);
 
 describe('Create Folder/Project Structure', () => {
-  let HierarchicalBindings: typeof import('../../components/organization').default;
+  let HierarchicalBindings: typeof import('../../components/organization').HierarchicalBindings;
 
   beforeAll(async () => {
     // It's important to import the program _after_ the mocks are defined.
     HierarchicalBindings = await (
       await import('../../components/organization')
-    ).default;
+    ).HierarchicalBindings;
   });
 
   it('with default values', () => {

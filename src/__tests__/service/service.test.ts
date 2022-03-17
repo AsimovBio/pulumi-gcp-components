@@ -4,13 +4,13 @@ import { pulumiRuntimeMocks } from '../mocks';
 pulumi.runtime.setMocks(pulumiRuntimeMocks);
 
 describe('Enable GCP Services', () => {
-  let EnabledGCPServices: typeof import('../../components/service').default;
+  let EnabledGCPServices: typeof import('../../components/service').EnabledGCPServices;
 
   beforeAll(async () => {
     // It's important to import the program _after_ the mocks are defined.
     EnabledGCPServices = await (
       await import('../../components/service')
-    ).default;
+    ).EnabledGCPServices;
   });
 
   it('with an empty service list', () => {

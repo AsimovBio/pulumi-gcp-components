@@ -8,7 +8,7 @@ type HierarchicalBindingsArgs = {
   billingAccountId?: pulumi.Input<string>;
 };
 
-export default class HierarchicalBindings extends pulumi.ComponentResource {
+export class HierarchicalBindings extends pulumi.ComponentResource {
   /*
    * Creates the basic hierarchical structure for a GCP project containing a top level Folder and an empty Project.
    */

@@ -5,13 +5,13 @@ import { pulumiRuntimeMocks } from '../mocks';
 pulumi.runtime.setMocks(pulumiRuntimeMocks);
 
 describe('Create a Service Account + Keypair', () => {
-  let ProjectServiceAccount: typeof import('../../components/serviceaccount').default;
+  let ProjectServiceAccount: typeof import('../../components/serviceaccount').ProjectServiceAccount;
 
   beforeAll(async () => {
     // It's important to import the program _after_ the mocks are defined.
     ProjectServiceAccount = await (
       await import('../../components/serviceaccount')
-    ).default;
+    ).ProjectServiceAccount;
   });
 
   it('with an empty role list and default values', () => {

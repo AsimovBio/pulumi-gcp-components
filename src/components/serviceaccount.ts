@@ -14,7 +14,7 @@ type IamRoleBinding = {
   id: string;
 };
 
-export default class ProjectServiceAccount extends pulumi.ComponentResource {
+export class ProjectServiceAccount extends pulumi.ComponentResource {
   /*
    * Creates the Service Account and Key used to deploy with automatic IAM role bindings.
    */

@@ -20,6 +20,7 @@ __metadata:
   dependencies:
     "@pulumi/gcp": ^6.15.1
     "@pulumi/kubernetes": ^3.16.0
+    "@pulumi/kubernetes-cert-manager": ^0.0.1
     "@pulumi/pulumi": ^3.26.1
     "@types/jest": ^27.4.1
     "@types/node": ^17.0.21
@@ -875,6 +876,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@pulumi/kubernetes-cert-manager@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@pulumi/kubernetes-cert-manager@npm:0.0.1"
+  dependencies:
+    "@pulumi/kubernetes": ^3.7.1
+  peerDependencies:
+    "@pulumi/pulumi": "*"
+  checksum: 1d8ba68f915f1fdfd7681268db759fe60be5c78b89985e0b8720bc6ab3e7bd96925762f1cc8a01ae3e4cee6e95e528b2b335061db555bfded541c0fc14ec9b42
+  languageName: node
+  linkType: hard
+
 "@pulumi/kubernetes@npm:^3.16.0":
   version: 3.16.0
   resolution: "@pulumi/kubernetes@npm:3.16.0"
@@ -888,6 +900,22 @@ __metadata:
     shell-quote: ^1.6.1
     tmp: ^0.0.33
   checksum: 0c459a9258d762ea0497399cb5907992dea9ed6011570582993cdbf75584c44aeda0cf57f31f09e0211da5c09afc0380d122e268939bd2a46765443285a083cf
+  languageName: node
+  linkType: hard
+
+"@pulumi/kubernetes@npm:^3.7.1":
+  version: 3.18.0
+  resolution: "@pulumi/kubernetes@npm:3.18.0"
+  dependencies:
+    "@pulumi/pulumi": ^3.0.0
+    "@types/glob": ^5.0.35
+    "@types/node-fetch": ^2.1.4
+    "@types/tmp": ^0.0.33
+    glob: ^7.1.2
+    node-fetch: ^2.3.0
+    shell-quote: ^1.6.1
+    tmp: ^0.0.33
+  checksum: d0178d18e1dc82cd1e45216b363917cd26d6afcaa5f621be2cad8be1e02477eb61fc8fbee977e1a43536144973c24fe76a171efb51d71ab70098ca3ca2904b51
   languageName: node
   linkType: hard
 

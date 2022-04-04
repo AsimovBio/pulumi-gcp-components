@@ -1,5 +1,5 @@
 import * as pulumi from '@pulumi/pulumi';
-import { pulumiRuntimeMocks } from '../mocks';
+import { pulumiRuntimeMocks } from '../mocks/pulumi';
 
 pulumi.runtime.setMocks(pulumiRuntimeMocks);
 

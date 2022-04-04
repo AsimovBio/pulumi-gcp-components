@@ -45,6 +45,7 @@
   "dependencies": {
     "@pulumi/gcp": "^6.15.1",
     "@pulumi/kubernetes": "^3.16.0",
+    "@pulumi/kubernetes-cert-manager": "^0.0.1",
     "@pulumi/pulumi": "^3.26.1"
   }
 }

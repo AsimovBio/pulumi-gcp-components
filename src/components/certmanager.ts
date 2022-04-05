@@ -8,7 +8,6 @@ type CertManagerServiceArgs = {
   namespace: pulumi.Input<string>;
   provider: k8s.Provider;
   issuerConfigFile: string;
-  certificateConfigFile: string;
   cloudDNSProject: pulumi.Input<string>;
   serviceAccountName: string;
   certificateConfiguration: CertificateConfiguration[];

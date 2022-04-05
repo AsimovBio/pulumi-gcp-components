@@ -11,14 +11,21 @@ type CertManagerServiceArgs = {
   certificateConfigFile: string;
   cloudDNSProject: pulumi.Input<string>;
   serviceAccountName: string;
-  applicationNamespace: pulumi.Input<string>;
-  sslDomain: pulumi.Input<string>;
+  certificateConfiguration: CertificateConfiguration[];
+};
+
+type CertificateConfiguration = {
+  certificateConfigFile: string;
+  domains: pulumi.Input<string>[];
+  namespace: pulumi.Input<string>;
 };
 
 export class CertManagerService extends pulumi.ComponentResource {
   /*
    * Creates the main k8s components
    */
+
+  certificates: k8s.yaml.ConfigFile[] = [];
 
   constructor(
     name: string,
@@ -95,23 +102,27 @@ export class CertManagerService extends pulumi.ComponentResource {
         dependsOn: [certManager, cloudDNSSASecret],
       }
     );
-    const certificate = new k8s.yaml.ConfigFile(
-      'certificate',
-      {
-        file: args.certificateConfigFile,
-        transformations: [
-          (obj: any) => {
-            obj.metadata.namespace = args.applicationNamespace;
-            obj.spec.dnsNames = [args.sslDomain];
-            obj.spec.acme.config[0].domains = [args.sslDomain];
-          },
-        ],
-      },
-      {
-        parent: this,
-        provider: args.provider,
-        dependsOn: certIssuer,
-      }
-    );
+    args.certificateConfiguration.forEach((config, index) => {
+      const certificate = new k8s.yaml.ConfigFile(
+        `certificate-${index}`,
+        {
+          file: args.certificateConfigFile,
+          transformations: [
+            (obj: any) => {
+              obj.metadata.namespace = config.namespace;
+              obj.spec.dnsNames = config.domains;
+              obj.spec.acme.config[0].domains = config.domains;
+            },
+          ],
+        },
+        {
+          parent: this,
+          provider: args.provider,
+          dependsOn: certIssuer,
+          aliases: ['certificate'],
+        }
+      );
+      this.certificates.push(certificate);
+    }, this);
   }
 }

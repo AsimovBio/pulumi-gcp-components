@@ -15,7 +15,7 @@ type CertManagerServiceArgs = {
 };
 
 type CertificateConfiguration = {
-  certificateConfigFile: string;
+  configFile: string;
   domains: pulumi.Input<string>[];
   namespace: pulumi.Input<string>;
 };
@@ -26,6 +26,8 @@ export class CertManagerService extends pulumi.ComponentResource {
    */
 
   certificates: k8s.yaml.ConfigFile[] = [];
+  args: CertManagerServiceArgs;
+  certIssuer: k8s.yaml.ConfigFile;
 
   constructor(
     name: string,
@@ -33,7 +35,7 @@ export class CertManagerService extends pulumi.ComponentResource {
     opts?: pulumi.ResourceOptions
   ) {
     super('asimov:components:CertManagerService', name, {}, opts);
-
+    this.args = args;
     // custom namespace dedicated to cert management things
     const certNs = new k8s.core.v1.Namespace(
       'cert-manager-namespace',
@@ -79,7 +81,7 @@ export class CertManagerService extends pulumi.ComponentResource {
       { parent: this, provider: args.provider }
     );
 
-    const certIssuer = new k8s.yaml.ConfigFile(
+    this.certIssuer = new k8s.yaml.ConfigFile(
       'cert-issuer',
       {
         file: args.issuerConfigFile,
@@ -103,26 +105,29 @@ export class CertManagerService extends pulumi.ComponentResource {
       }
     );
     args.certificateConfiguration.forEach((config, index) => {
-      const certificate = new k8s.yaml.ConfigFile(
-        `certificate-${index}`,
-        {
-          file: args.certificateConfigFile,
-          transformations: [
-            (obj: any) => {
-              obj.metadata.namespace = config.namespace;
-              obj.spec.dnsNames = config.domains;
-              obj.spec.acme.config[0].domains = config.domains;
-            },
-          ],
-        },
-        {
-          parent: this,
-          provider: args.provider,
-          dependsOn: certIssuer,
-          aliases: ['certificate'],
-        }
-      );
-      this.certificates.push(certificate);
+      this.addCertificate(`certificate-${index}`, config);
     }, this);
+  }
+  public addCertificate(name: string, config: CertificateConfiguration) {
+    const certificate = new k8s.yaml.ConfigFile(
+      name,
+      {
+        file: config.configFile,
+        transformations: [
+          (obj: any) => {
+            obj.metadata.namespace = config.namespace;
+            obj.spec.dnsNames = config.domains;
+            obj.spec.acme.config[0].domains = config.domains;
+          },
+        ],
+      },
+      {
+        parent: this,
+        provider: this.args.provider,
+        dependsOn: this.certIssuer,
+        aliases: ['certificate'],
+      }
+    );
+    this.certificates.push(certificate);
   }
 }

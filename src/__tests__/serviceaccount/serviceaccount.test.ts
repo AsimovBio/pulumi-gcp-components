@@ -45,9 +45,7 @@ describe('Create a Service Account + Keypair', () => {
       saId: 'my-sa',
       roles: ['roles/dns.viewer'],
     });
-    sa.iamMembership[0].project.apply((project) => {
-      expect(project).toBe('my-project');
-    });
+
     sa.iamMembership[0].role.apply((role) => {
       expect(role).toBe('roles/dns.viewer');
     });
@@ -57,9 +55,6 @@ describe('Create a Service Account + Keypair', () => {
       projectName: 'my-project',
       saId: 'my-sa',
       roles: [{ project: 'another-project', id: 'roles/dns.admin' }],
-    });
-    sa.iamMembership[0].project.apply((project) => {
-      expect(project).toBe('another-project');
     });
     sa.iamMembership[0].role.apply((role) => {
       expect(role).toBe('roles/dns.admin');

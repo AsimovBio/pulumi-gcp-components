@@ -24,7 +24,7 @@
   ],
   "author": "vinicius.schettino@asimov.com",
   "license": "MIT",
-  "packageManager": "yarn@3.2.0",
+  "packageManager": "yarn@3.2.1",
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.21",

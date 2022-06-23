@@ -10,7 +10,8 @@ type ProjectServiceAccountArgs = {
 };
 
 type IamRoleBinding = {
-  project: pulumi.Input<string>;
+  project?: pulumi.Input<string>;
+  organizationId?: pulumi.Input<string>;
   id: string;
 };
 
@@ -23,7 +24,7 @@ export class ProjectServiceAccount extends pulumi.ComponentResource {
   key: gcp.serviceaccount.Key;
   rawKey: pulumi.Output<string>;
   jsonKey: pulumi.Output<any>;
-  iamMembership: gcp.projects.IAMMember[] = [];
+  iamMembership: (gcp.projects.IAMMember | gcp.organizations.IAMMember)[] = [];
 
   constructor(
     name: string,
@@ -46,6 +47,7 @@ export class ProjectServiceAccount extends pulumi.ComponentResource {
     (args.roles || []).forEach((role) => {
       let roleId;
       let project;
+      let membership;
       if (typeof role == 'string') {
         roleId = role;
         project = args.projectName;
@@ -54,16 +56,30 @@ export class ProjectServiceAccount extends pulumi.ComponentResource {
         roleId = role.id;
         project = role.project;
       }
-      const membership = new gcp.projects.IAMMember(
-        `${name}-${roleId}`,
-        {
-          member: pulumi.interpolate`serviceAccount:${this.sa.email}`,
-          role: roleId,
-          project: project,
-        },
-        { parent: this }
-      );
-      this.iamMembership.push(membership);
+      if (project) {
+        membership = new gcp.projects.IAMMember(
+          `${name}-${roleId}`,
+          {
+            member: pulumi.interpolate`serviceAccount:${this.sa.email}`,
+            role: roleId,
+            project: project,
+          },
+          { parent: this }
+        );
+      } else if (typeof role == 'object') {
+        membership = new gcp.organizations.IAMMember(
+          `${name}-${roleId}`,
+          {
+            member: pulumi.interpolate`serviceAccount:${this.sa.email}`,
+            role: roleId,
+            orgId: role.organizationId || '',
+          },
+          { parent: this }
+        );
+      }
+      if (membership) {
+        this.iamMembership.push(membership);
+      }
     });
 
     this.key = new gcp.serviceaccount.Key(

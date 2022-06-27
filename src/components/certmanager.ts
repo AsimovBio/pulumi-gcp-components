@@ -124,7 +124,6 @@ export class CertManagerService extends pulumi.ComponentResource {
         parent: this,
         provider: this.args.provider,
         dependsOn: this.certIssuer,
-        aliases: ['certificate'],
       }
     );
     this.certificates.push(certificate);
